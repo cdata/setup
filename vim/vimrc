@@ -1,0 +1,90 @@
+set t_Co=256
+
+" Turn on line numbering. Turn it off with 'set nonu'
+set nu
+
+" Fix backspace when on the terminal...
+set backspace=2
+
+" Set plugin / syntax required options...
+set nocompatible
+filetype off
+syntax on
+
+" Setup Vundler...
+set rtp+=~/.vim/bundle/vundle/
+call vundle#rc()
+
+" let Vundle manage Vundle
+" required!
+Bundle 'gmarik/vundle'
+
+" Github bundles
+Bundle 'scrooloose/nerdtree'
+Bundle 'scrooloose/nerdcommenter'
+Bundle 'scrooloose/syntastic'
+Bundle 'plasticboy/vim-markdown'
+Bundle 'Lokaltog/vim-easymotion'
+Bundle 'rstacruz/sparkup'
+Bundle 'pangloss/vim-javascript'
+Bundle 'tpope/vim-fugitive'
+Bundle 'wavded/vim-stylus'
+Bundle 'cakebaker/scss-syntax.vim'
+Bundle 'kchmck/vim-coffee-script'
+Bundle 'altercation/vim-colors-solarized'
+Bundle 'tomasr/molokai'
+Bundle 'nanotech/jellybeans.vim'
+
+" Vim-scripts bundles
+Bundle 'Zenburn'
+Bundle 'Wombat'
+Bundle 'wombat256.vim'
+
+" Plugin-specific settings...
+
+" Set personalized key settings...
+let NERDComInsertMap='<c-c>'
+let mapleader=","
+
+" This allows the current search to be cleared with <F3>
+nnoremap <F3> :let @/ = ""<CR>
+set whichwrap+=<,>,h,l,[,]
+
+" Indent automatically depending on filetype
+filetype indent on
+set autoindent
+
+" 'Smart' case insensitive search
+set ic
+set sc
+
+" Set tabs to four spaces + smart indentation
+set smartindent
+set tabstop=2
+set shiftwidth=2
+set expandtab
+
+" Add row / columnn information
+set ruler
+
+" Higlhight search
+set hls
+
+" Wrap text instead of being on one line
+set lbr
+
+" Change colorscheme from default to zenburn
+set background=dark
+let g:solarized_termcolors=256
+try
+  colorscheme zenburn
+catch
+endtry
+
+" Highlight trailing whitespace
+highlight ExtraWhitespace ctermbg=red guibg=red
+match ExtraWhitespace /\s\+$/
+autocmd BufWinEnter * match ExtraWhitespace /\s\+$/
+autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
+autocmd InsertLeave * match ExtraWhitespace /\s\+$/
+autocmd BufWinLeave * call clearmatches()
