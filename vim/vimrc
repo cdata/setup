@@ -1,3 +1,4 @@
+set nocompatible
 set t_Co=256
 
 " Turn on line numbering. Turn it off with 'set nonu'
@@ -7,7 +8,6 @@ set nu
 set backspace=2
 
 " Set plugin / syntax required options...
-set nocompatible
 filetype off
 syntax on
 
@@ -34,6 +34,9 @@ Bundle 'kchmck/vim-coffee-script'
 Bundle 'altercation/vim-colors-solarized'
 Bundle 'tomasr/molokai'
 Bundle 'nanotech/jellybeans.vim'
+Bundle 'Lokaltog/vim-distinguished'
+Bundle 'tpope/vim-vividchalk'
+Bundle 'noahfrederick/Hemisu'
 
 " Vim-scripts bundles
 Bundle 'Zenburn'
@@ -46,6 +49,12 @@ Bundle 'wombat256.vim'
 let NERDComInsertMap='<c-c>'
 let mapleader=","
 
+" Configure Syntastic...
+let g:syntastic_check_on_open=1
+let g:syntastic_enable_signs=1
+let g:syntastic_error_symbol='✗'
+let g:syntastic_warning_symbol='⚠'
+
 " This allows the current search to be cleared with <F3>
 nnoremap <F3> :let @/ = ""<CR>
 set whichwrap+=<,>,h,l,[,]
@@ -55,7 +64,8 @@ filetype indent on
 set autoindent
 
 " 'Smart' case insensitive search
-set ic
+set scs
+" Show command in the last line of the screen
 set sc
 
 " Set tabs to four spaces + smart indentation

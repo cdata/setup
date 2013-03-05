@@ -8,6 +8,7 @@ clone=( \
   https://github.com/revans/bash-it.git \
   https://github.com/joyent/node.git \
   https://github.com/gmarik/vundle.git \
+  https://github.com/Lokaltog/powerline-fonts \
 )
 
 backup=( \
@@ -104,6 +105,15 @@ function initializeDotFiles {
   ln -s $support/bash-it $HOME/.bash_it
   mkdir -p $support/bash-it/themes/cdata
   ln -s $bash/cdata.theme.bash $support/bash-it/themes/cdata/cdata.theme.bash
+}
+
+function initializeFonts {
+  fonts_dir=$HOME/Library/Fonts
+  fonts_repo=$support/powerline-fonts
+
+  cd $fonts_dir
+  #ln -s $fonts_repo/Menlo/Menlo\ Regular\ for\ Powerline.otf
+  #ln -s $fonts_repo/
 }
 
 function initializeVim {
