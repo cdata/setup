@@ -8,7 +8,8 @@ clone=( \
   https://github.com/revans/bash-it.git \
   https://github.com/joyent/node.git \
   https://github.com/gmarik/vundle.git \
-  https://github.com/Lokaltog/powerline-fonts \
+  https://github.com/Lokaltog/powerline-fonts.git \
+  https://github.com/erikw/tmux-powerline.git \
 )
 
 backup=( \
@@ -25,6 +26,7 @@ ssh=$setup/ssh
 vim=$setup/vim
 tmux=$setup/tmux
 screen=$setup/screen
+mpd=$setup/mpd
 support=$setup/support
 
 function initializePlatform {
@@ -36,6 +38,8 @@ function initializePlatform {
     brew install macvim
     brew install tmux
     brew install wget
+    brew install mpd
+    brew install ncmpcpp --visualizer
   else
     # Handle an Ubuntu system...
     sudo apt-get -yq update
@@ -89,6 +93,7 @@ function initializeDotFiles {
 
   # Tmux
   ln -s $tmux/tmux.conf $HOME/.tmux.conf
+  ln -s $tmux/powerline/tmux-powerlinerc $HOME/.tmux-powerlinerc
 
   # Screen
   ln -s $screen/screenrc $HOME/.screenrc
@@ -105,15 +110,46 @@ function initializeDotFiles {
   ln -s $support/bash-it $HOME/.bash_it
   mkdir -p $support/bash-it/themes/cdata
   ln -s $bash/cdata.theme.bash $support/bash-it/themes/cdata/cdata.theme.bash
+
+  if [[ "$platform" == 'Darwin' ]]; then
+    # mpd
+    ln -s $mpd/mpdconf $HOME/.mpdconf
+    mkdir -p $HOME/.mpd
+    mkdir -p $HOME/.ncmpcpp
+    mkdir -p $HOME/.lyrics
+    ln -s $mpd/ncmpcpp-config $HOME/.ncmpcpp/config
+  fi
 }
 
 function initializeFonts {
   fonts_dir=$HOME/Library/Fonts
   fonts_repo=$support/powerline-fonts
 
-  cd $fonts_dir
-  #ln -s $fonts_repo/Menlo/Menlo\ Regular\ for\ Powerline.otf
-  #ln -s $fonts_repo/
+  if [[ "$platform" == 'Darwin' ]]; then
+    # Only set up fonts on OSX for now..
+    cd $fonts_dir
+    #cp "$fonts_repo/DejaVuSansMono/DejaVu Sans Mono for Powerline.otf" ./
+    #cp "$fonts_repo/DroidSansMono/Droid Sans Mono for Powerline.otf" ./
+    #cp "$fonts_repo/Inconsolata/Inconsolata for Powerline.otf" ./
+    #cp "$fonts_repo/Menlo/Menlo Regular for Powerline.otf" ./
+    #cp "$fonts_repo/Meslo/Meslo LG L Regular for Powerline.otf" ./
+    #cp "$fonts_repo/Meslo/Meslo LG L DZ Regular for Powerline.otf" ./
+    cp "$fonts_repo/Meslo/Meslo LG M Regular for Powerline.otf" ./
+    #cp "$fonts_repo/Meslo/Meslo LG M DZ Regular for Powerline.otf" ./
+    #cp "$fonts_repo/Meslo/Meslo LG S Regular for Powerline.otf" ./
+    #cp "$fonts_repo/Meslo/Meslo LG S DZ Regular for Powerline.otf" ./
+    #cp "$fonts_repo/SourceCodePro/Source Code Pro Black for Powerline.otf" ./
+    #cp "$fonts_repo/SourceCodePro/Source Code Pro Bold for Powerline.otf" ./
+    #cp "$fonts_repo/SourceCodePro/Source Code Pro ExtraLight for Powerline.otf" ./
+    #cp "$fonts_repo/SourceCodePro/Source Code Pro Light for Powerline.otf" ./
+    #cp "$fonts_repo/SourceCodePro/Source Code Pro Medium for Powerline.otf" ./
+    #cp "$fonts_repo/SourceCodePro/Source Code Pro Regular for Powerline.otf" ./
+    #cp "$fonts_repo/SourceCodePro/Source Code Pro Semibold for Powerline.otf" ./
+    #cp "$fonts_repo/UbuntuMono/Ubuntu Mono Bold for Powerline.otf" ./
+    #cp "$fonts_repo/UbuntuMono/Ubuntu Mono Bold Italic for Powerline.otf" ./
+    #cp "$fonts_repo/UbuntuMono/Ubuntu Mono for Powerline.otf" ./
+    #cp "$fonts_repo/UbuntuMono/Ubuntu Mono Italic for Powerline.otf" ./
+  fi
 }
 
 function initializeVim {
@@ -127,6 +163,7 @@ function selfDestruct {
 initializePlatform
 initializeRepositories
 initializeDotFiles
+initializeFonts
 initializeVim
 selfDestruct
 
