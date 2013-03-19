@@ -27,6 +27,7 @@ vim=$setup/vim
 tmux=$setup/tmux
 screen=$setup/screen
 mpd=$setup/mpd
+automator=$setup/automator
 support=$setup/support
 
 function initializePlatform {
@@ -40,6 +41,7 @@ function initializePlatform {
     brew install wget
     brew install mpd
     brew install ncmpcpp --visualizer
+    brew linkapps
   else
     # Handle an Ubuntu system...
     sudo apt-get -yq update
@@ -118,6 +120,9 @@ function initializeDotFiles {
     mkdir -p $HOME/.ncmpcpp
     mkdir -p $HOME/.lyrics
     ln -s $mpd/ncmpcpp-config $HOME/.ncmpcpp/config
+
+    # Automator
+    osascript -e "tell application \"Finder\" to make alias file to POSIX file \"${automator}/Vim.app\" at POSIX file \"${HOME}/Applications\""
   fi
 }
 

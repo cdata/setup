@@ -38,6 +38,8 @@ Bundle 'nanotech/jellybeans.vim'
 Bundle 'Lokaltog/vim-distinguished'
 Bundle 'tpope/vim-vividchalk'
 Bundle 'noahfrederick/Hemisu'
+Bundle 'morhetz/gruvbox'
+Bundle 'bogado/file-line'
 
 " Vim-scripts bundles
 Bundle 'Zenburn'
