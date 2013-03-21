@@ -40,6 +40,9 @@ Bundle 'tpope/vim-vividchalk'
 Bundle 'noahfrederick/Hemisu'
 Bundle 'morhetz/gruvbox'
 Bundle 'bogado/file-line'
+Bundle 'jistr/vim-nerdtree-tabs'
+Bundle 'Shougo/neocomplcache.git'
+Bundle 'Shougo/neosnippet.git'
 
 " Vim-scripts bundles
 Bundle 'Zenburn'
@@ -61,6 +64,35 @@ let g:syntastic_warning_symbol='⚠'
 let g:syntastic_mode_map={ 'mode': 'active',
                          \ 'active_filetypes': ['javascript', 'css', 'html'],
                          \ 'passive_filetypes': ['java'] }
+
+" Neocomplecache
+let g:neocomplcache_enable_at_startup = 1
+let g:neocomplcache_enable_smart_case = 1
+let g:neocomplcache_enable_camel_case_completion = 1
+let g:neocomplcache_enable_underbar_completion = 1
+let g:neocomplcache_min_syntax_length = 3
+
+inoremap <expr><CR>  neocomplcache#smart_close_popup() . "\<CR>"
+inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+
+inoremap <expr><C-h>  neocomplcache#smart_close_popup() . "\<C-h>"
+inoremap <expr><BS>  neocomplcache#smart_close_popup() . "\<C-h>"
+inoremap <expr><C-y>  neocomplcache#close_popup()
+inoremap <expr><C-e>  neocomplcache#cancel_popup()
+
+autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
+autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
+autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
+autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+
+" Neosnippet
+imap <C-k>     <Plug>(neosnippet_expand_or_jump)
+smap <C-k>     <Plug>(neosnippet_expand_or_jump)
+
+" Automatically close preview window when popup closes
+autocmd CursorMovedI * if pumvisible() == 0|pclose|endif
+autocmd InsertLeave * if pumvisible() == 0|pclose|endif
 
 " This allows the current search to be cleared with <F3>
 nnoremap <F3> :let @/ = ""<CR>
