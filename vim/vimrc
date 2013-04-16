@@ -50,6 +50,7 @@ Bundle 'terryma/vim-multiple-cursors'
 Bundle 'Zenburn'
 Bundle 'Wombat'
 Bundle 'wombat256.vim'
+Bundle 'sudo.vim'
 
 " Plugin-specific settings...
 
