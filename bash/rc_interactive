@@ -3,7 +3,10 @@
 # If not running interactively, don't do anything
 [ -z "$PS1" ] && return
 
-alias repos='cd ~/repositories'
+# Personal aliases
+alias repos="cd $CDATA_REPOSITORIES"
+alias setup="cd $CDATA_SETUP"
+alias update="sh $CDATA_SETUP/setup.sh update"
 
 # enable color support of ls and also add handy aliases
 if [ -x /usr/bin/dircolors ]; then
@@ -37,6 +40,7 @@ shopt -s checkwinsize
 alias ll='ls -alFG'
 alias la='ls -AG'
 alias l='ls -CFG'
+
 
 # Path to the bash it configuration
 export BASH=$HOME/.bash_it

@@ -41,8 +41,10 @@ Bundle 'noahfrederick/Hemisu'
 Bundle 'morhetz/gruvbox'
 Bundle 'bogado/file-line'
 Bundle 'jistr/vim-nerdtree-tabs'
-Bundle 'Shougo/neocomplcache.git'
-Bundle 'Shougo/neosnippet.git'
+Bundle 'Shougo/neocomplcache'
+Bundle 'Shougo/neosnippet'
+Bundle 'vim-scripts/VOoM'
+Bundle 'terryma/vim-multiple-cursors'
 
 " Vim-scripts bundles
 Bundle 'Zenburn'
@@ -66,7 +68,7 @@ let g:syntastic_mode_map={ 'mode': 'active',
                          \ 'passive_filetypes': ['java'] }
 
 " Neocomplecache
-let g:neocomplcache_enable_at_startup = 1
+let g:neocomplcache_enable_at_startup = 0
 let g:neocomplcache_enable_smart_case = 1
 let g:neocomplcache_enable_camel_case_completion = 1
 let g:neocomplcache_enable_underbar_completion = 1

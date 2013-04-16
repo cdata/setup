@@ -1,12 +1,12 @@
 #!/bin/bash
 
+command=$1
 platform=`uname`
 workingDirectory=`pwd`
 
 clone=( \
   https://github.com/gioele/bashrc_dispatch.git \
   https://github.com/revans/bash-it.git \
-  https://github.com/joyent/node.git \
   https://github.com/gmarik/vundle.git \
   https://github.com/Lokaltog/powerline-fonts.git \
   https://github.com/erikw/tmux-powerline.git \
@@ -31,6 +31,8 @@ automator=$setup/automator
 support=$setup/support
 
 function initializePlatform {
+  echo "Running $FUNCNAME"
+  set -e
   if [[ "$platform" == 'Darwin' ]]; then
     # Handle an OSX system - assumes XCode is installed (LAME!)...
     /usr/bin/ruby -e "$(curl -fsSL https://raw.github.com/mxcl/homebrew/go)"
@@ -48,9 +50,23 @@ function initializePlatform {
     sudo apt-get -yq upgrade
     sudo apt-get -yq install aptitude git build-essential openssh-server vim tmux
   fi
+  set +e
+}
+
+function updatePlatform {
+  echo "Running $FUNCNAME"
+  if [[ "$platform" == 'Darwin' ]]; then
+    brew update
+    brew upgrade
+    brew linkapps
+  else
+    sudo apt-get -yq update
+    sudo apt-get -yq upgrade
+  fi
 }
 
 function initializeRepositories {
+  echo "Running $FUNCNAME"
   mkdir -p $repositories
   cd $repositories
 
@@ -62,11 +78,25 @@ function initializeRepositories {
   for repository in "${clone[@]}"; do
     git clone $repository
   done
+}
 
-  ln -s $support/node $repositories/node
+function updateRepositories {
+  echo "Running $FUNCNAME"
+  cd $support
+
+  for repository in *; do
+    if [ -d "$repository" ]; then
+      echo "Updating $repository.."
+      cd $support/$repository
+      git fetch
+      git rebase origin/master
+      cd $support
+    fi
+  done
 }
 
 function initializeDotFiles {
+  echo "Running $FUNCNAME"
   cd ~/
 
   # Backup default stuff..
@@ -127,6 +157,7 @@ function initializeDotFiles {
 }
 
 function initializeFonts {
+  echo "Running $FUNCNAME"
   fonts_dir=$HOME/Library/Fonts
   fonts_repo=$support/powerline-fonts
 
@@ -158,17 +189,31 @@ function initializeFonts {
 }
 
 function initializeVim {
+  echo "Running $FUNCNAME"
   vim +BundleInstall +qall
 }
 
+function updateVim {
+  echo "Running $FUNCNAME"
+  vim +BundleUpdate +qall
+}
+
 function selfDestruct {
+  echo "Running $FUNCNAME"
   rm $workingDirectory/$0
 }
 
-initializePlatform
-initializeRepositories
-initializeDotFiles
-initializeFonts
-initializeVim
-selfDestruct
+if [[ "$command" == 'update' ]]; then
+  updatePlatform
+  updateRepositories
+  updateVim
+else
+  initializePlatform
+  initializeRepositories
+  initializeDotFiles
+  initializeFonts
+  initializeVim
+  selfDestruct
+fi
 
+echo "Done."
