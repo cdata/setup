@@ -27,6 +27,7 @@ vim=$setup/vim
 tmux=$setup/tmux
 screen=$setup/screen
 mpd=$setup/mpd
+node=$setup/node
 automator=$setup/automator
 support=$setup/support
 
@@ -133,6 +134,9 @@ function initializeDotFiles {
   # SSH
   mkdir -p $HOME/.ssh
   ln -s $ssh/publickeys $HOME/.ssh/authorized_keys
+
+  # Node
+  ln -s $node/npmrc $HOME/.npmrc
 
   # Vim
   ln -s $vim/vimrc $HOME/.vimrc

@@ -1,5 +1,6 @@
 # Cause Homebrew is awesome..
 export PATH=$PATH:/usr/local/share/npm/bin
+export PATH=$PATH:$HOME/.npm-packages/bin
 # Remove this whenever https://github.com/mxcl/homebrew/issues/14123
 # is properly resolved, I guess...
 export PKG_CONFIG_PATH=$PKG_CONFIG_PATH:/opt/X11/lib/pkgconfig
