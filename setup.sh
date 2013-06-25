@@ -208,11 +208,13 @@ if [[ "$command" == 'update' ]]; then
   updateRepositories
   updateVim
 else
-  initializePlatform
-  initializeRepositories
-  initializeDotFiles
-  initializeFonts
-  initializeVim
+  if [[ ! -a "$setup" ]]; then
+    initializePlatform
+    initializeRepositories
+    initializeDotFiles
+    initializeFonts
+    initializeVim
+  fi
   selfDestruct
 fi
 
