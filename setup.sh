@@ -190,12 +190,12 @@ function initializeFonts {
 
 function initializeVim {
   echo "Running $FUNCNAME"
-  vim +BundleInstall +qall
+  vim +BundleInstall +qall!
 }
 
 function updateVim {
   echo "Running $FUNCNAME"
-  vim +BundleUpdate +qall
+  vim +BundleUpdate +qall!
 }
 
 function selfDestruct {
