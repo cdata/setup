@@ -190,17 +190,17 @@ function initializeFonts {
 
 function initializeVim {
   echo "Running $FUNCNAME"
-  vim +BundleInstall +qall!
+  vim +BundleInstall! +BundleClean! +qall!
 }
 
 function updateVim {
   echo "Running $FUNCNAME"
-  vim +BundleUpdate +qall!
+  vim +BundleUpdate! +BundleClean! +qall!
 }
 
 function selfDestruct {
   echo "Running $FUNCNAME"
-  rm $workingDirectory/$0
+  rm $0
 }
 
 if [[ "$command" == 'update' ]]; then
