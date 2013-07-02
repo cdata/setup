@@ -8,9 +8,9 @@ set nu
 set backspace=2
 
 " Set plugin / syntax required options...
+syntax on
 filetype off
 filetype plugin on
-syntax on
 
 " Setup Vundler...
 set rtp+=~/.vim/bundle/vundle/
@@ -44,6 +44,7 @@ Bundle 'jistr/vim-nerdtree-tabs'
 "Bundle 'Shougo/neocomplcache'
 "Bundle 'Shougo/neosnippet'
 Bundle 'vim-scripts/VOoM'
+Bundle 'slim-template/vim-slim'
 Bundle 'terryma/vim-multiple-cursors'
 
 " Vim-scripts bundles
@@ -53,6 +54,9 @@ Bundle 'wombat256.vim'
 Bundle 'sudo.vim'
 
 " Plugin-specific settings...
+
+" Filetypes
+autocmd BufNewFile,BufRead *.slim set filetype=slim
 
 " Set personalized key settings...
 let NERDComInsertMap='<c-c>'
