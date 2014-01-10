@@ -129,6 +129,10 @@ set hls
 " Wrap text instead of being on one line
 set lbr
 
+" equalprg
+"au FileType html setlocal equalprg=tidy\ -q\ -i\ -w\ 0\ -m\ -utf8\ --show-body-only\ true\ --show-errors\ 0
+au FileType json setlocal equalprg=python\ -m\ json.tool
+
 " Change colorscheme from default to zenburn
 set background=dark
 let g:solarized_termcolors=256

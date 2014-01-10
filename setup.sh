@@ -199,7 +199,7 @@ function initializeVim {
 
 function updateVim {
   echo "Running $FUNCNAME"
-  vim +BundleUpdate! +BundleClean! +qall!
+  vim +BundleUpdate +BundleClean! +qall!
 }
 
 function selfDestruct {
