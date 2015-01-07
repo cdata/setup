@@ -8,7 +8,7 @@ workingDirectory=`pwd`
 clone=( \
   https://github.com/gioele/bashrc_dispatch.git \
   https://github.com/revans/bash-it.git \
-  https://github.com/gmarik/vundle.git \
+  https://github.com/gmarik/Vundle.vim.git \
   https://github.com/Lokaltog/powerline-fonts.git \
   https://github.com/erikw/tmux-powerline.git \
 )
@@ -27,7 +27,6 @@ ssh=$setup/ssh
 vim=$setup/vim
 tmux=$setup/tmux
 screen=$setup/screen
-mpd=$setup/mpd
 node=$setup/node
 automator=$setup/automator
 support=$setup/support
@@ -98,7 +97,7 @@ function updateRepositories {
 
 function initializeDotFiles {
   echo "Running $FUNCNAME"
-  cd ~/
+  cd $HOME
 
   # Backup default stuff..
   for bashconfig in "${backup[@]}"; do
@@ -109,52 +108,45 @@ function initializeDotFiles {
 
   # Vundler..
   mkdir -p $HOME/.vim/bundle
-  ln -s $support/vundle $HOME/.vim/bundle/vundle
+  ln -sf $support/Vundle.vim $HOME/.vim/bundle/Vundle.vim
 
   # Bash dispatcher..
   bashrc_dispatch=$support/bashrc_dispatch/bashrc_dispatch
 
-  ln -s $bashrc_dispatch ./.bashrc
-  ln -s $bashrc_dispatch ./.bash_profile
-  ln -s $bashrc_dispatch ./.profile
-  ln -s $bashrc_dispatch ./.bash_login
+  ln -sf $bashrc_dispatch ./.bashrc
+  ln -sf $bashrc_dispatch ./.bash_profile
+  ln -sf $bashrc_dispatch ./.profile
+  ln -sf $bashrc_dispatch ./.bash_login
 
-  ln -s $bash/rc_all $HOME/.bashrc_all
-  ln -s $bash/rc_interactive $HOME/.bashrc_interactive
-  ln -s $bash/rc_login $HOME/.bashrc_login
-  ln -s $bash/rc_script $HOME/.bashrc_script
+  ln -sf $bash/rc_all $HOME/.bashrc_all
+  ln -sf $bash/rc_interactive $HOME/.bashrc_interactive
+  ln -sf $bash/rc_login $HOME/.bashrc_login
+  ln -sf $bash/rc_script $HOME/.bashrc_script
 
   # Tmux
-  ln -s $tmux/tmux.conf $HOME/.tmux.conf
-  ln -s $tmux/powerline/tmux-powerlinerc $HOME/.tmux-powerlinerc
+  ln -sf $tmux/tmux.conf $HOME/.tmux.conf
+  ln -sf $tmux/powerline/tmux-powerlinerc $HOME/.tmux-powerlinerc
 
   # Screen
-  ln -s $screen/screenrc $HOME/.screenrc
+  ln -sf $screen/screenrc $HOME/.screenrc
 
   # SSH
   mkdir -p $HOME/.ssh
-  ln -s $ssh/publickeys $HOME/.ssh/authorized_keys
+  ln -sf $ssh/publickeys $HOME/.ssh/authorized_keys
 
   # Node
-  ln -s $node/npmrc $HOME/.npmrc
+  ln -sf $node/npmrc $HOME/.npmrc
 
   # Vim
-  ln -s $vim/vimrc $HOME/.vimrc
-  ln -s $vim/gvimrc $HOME/.gvimrc
+  ln -sf $vim/vimrc $HOME/.vimrc
+  ln -sf $vim/gvimrc $HOME/.gvimrc
 
   # Bash-it
-  ln -s $support/bash-it $HOME/.bash_it
+  ln -sf $support/bash-it $HOME/.bash_it
   mkdir -p $support/bash-it/themes/cdata
-  ln -s $bash/cdata.theme.bash $support/bash-it/themes/cdata/cdata.theme.bash
+  ln -sf $bash/cdata.theme.bash $support/bash-it/themes/cdata/cdata.theme.bash
 
   if [[ "$platform" == 'Darwin' ]]; then
-    # mpd
-    ln -s $mpd/mpdconf $HOME/.mpdconf
-    mkdir -p $HOME/.mpd
-    mkdir -p $HOME/.ncmpcpp
-    mkdir -p $HOME/.lyrics
-    ln -s $mpd/ncmpcpp-config $HOME/.ncmpcpp/config
-
     # Automator
     osascript -e "tell application \"Finder\" to make alias file to POSIX file \"${automator}/Vim.app\" at POSIX file \"${HOME}/Applications\""
   fi
@@ -195,11 +187,22 @@ function initializeFonts {
 function initializeVim {
   echo "Running $FUNCNAME"
   vim +BundleInstall! +BundleClean! +qall!
+  installYouCompleteMe
+}
+
+function installYouCompleteMe {
+  echo "Running $FUNCNAME"
+  
+  cd $HOME/.vim/bundle/YouCompleteMe
+  ./install.sh --clang-completer
+  
+  cd $HOME
 }
 
 function updateVim {
   echo "Running $FUNCNAME"
   vim +BundleUpdate +BundleClean! +qall!
+  installYouCompleteMe
 }
 
 function selfDestruct {
