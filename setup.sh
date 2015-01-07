@@ -1,4 +1,5 @@
 #!/bin/bash
+set -x
 
 command=$1
 platform=`uname`
@@ -36,14 +37,13 @@ function initializePlatform {
   set -e
   if [[ "$platform" == 'Darwin' ]]; then
     # Handle an OSX system - assumes XCode is installed (LAME!)...
-    /usr/bin/ruby -e "$(curl -fsSL https://raw.github.com/mxcl/homebrew/go)"
+    `which xcode-select` --install
+    `which ruby` -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 
     brew install git
-    brew install macvim
     brew install tmux
     brew install wget
-    brew install mpd
-    brew install ncmpcpp --visualizer
+    brew install vim
     brew linkapps
   else
     # Handle an Ubuntu system...
