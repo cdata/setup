@@ -71,13 +71,26 @@ export RBENV_ROOT=/usr/local/var/rbenv
 if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
 
 # Bash prompt variables for OSX
-if [ -f /Applications/Xcode.app/Contents/Developer/usr/share/git-core/git-completion.bash ]; then
-  source /Applications/Xcode.app/Contents/Developer/usr/share/git-core/git-completion.bash
-fi
+completion_files=( \
+  /Applications/Xcode.app/Contents/Developer/usr/share/git-core/git-completion.bash \
+  /Applications/Xcode.app/Contents/Developer/usr/share/git-core/git-prompt.sh \
+  /usr/local/git/current/share/git-core/git-completion.sh \
+  /usr/local/git/current/share/git-core/git-prompt.sh \
+)
 
-if [ -f /Applications/Xcode.app/Contents/Developer/usr/share/git-core/git-prompt.sh ]; then
-  source /Applications/Xcode.app/Contents/Developer/usr/share/git-core/git-prompt.sh
-fi
+for completion_file in "${completion_files[@]}"; do
+  if [ -f $completion_file ]; then
+    source $completion_file
+  fi
+done
+
+#if [ -f /Applications/Xcode.app/Contents/Developer/usr/share/git-core/git-completion.bash ]; then
+  #source /Applications/Xcode.app/Contents/Developer/usr/share/git-core/git-completion.bash
+#fi
+
+#if [ -f /Applications/Xcode.app/Contents/Developer/usr/share/git-core/git-prompt.sh ]; then
+  #source /Applications/Xcode.app/Contents/Developer/usr/share/git-core/git-prompt.sh
+#fi
 
 # Finalize dat path
 export PATH=$PATH:node_modules/.bin
