@@ -1,62 +1,113 @@
 set nocompatible
 set t_Co=256
+filetype off
 
-" Turn on line numbering. Turn it off with 'set nonu'
-set nu
+" Setup Vundler...
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+
+" let Vundle manage Vundle
+" required!
+Plugin 'gmarik/Vundle.vim'
+
+" Github bundles
+" Interface
+Plugin 'scrooloose/nerdtree'
+Plugin 'scrooloose/syntastic'
+Plugin 'Lokaltog/vim-easymotion'
+Plugin 'bogado/file-line'
+Plugin 'sudo.vim'
+Plugin 'kien/ctrlp.vim'
+Plugin 'terryma/vim-multiple-cursors'
+Plugin 'rstacruz/sparkup'
+Plugin 'scrooloose/nerdcommenter'
+Plugin 'nathanaelkane/vim-indent-guides'
+Plugin 'Raimondi/delimitMate'
+Plugin 'Valloric/YouCompleteMe' " Vim 7.4+. Extra build step: ./install.sh --clang-completer
+
+" JavaScript
+Plugin 'pangloss/vim-javascript'
+Plugin 'marijnh/tern_for_vim' " Extra build step. npm install (use system npm)
+Plugin 'kchmck/vim-coffee-script'
+
+" Templates / Markup
+Plugin 'slim-template/vim-slim'
+Plugin 'mustache/vim-mustache-handlebars'
+
+" CSS
+Plugin 'cakebaker/scss-syntax.vim'
+Plugin 'wavded/vim-stylus'
+Plugin 'groenewege/vim-less'
+
+" Git
+Plugin 'tpope/vim-fugitive'
+
+" Colorschemes
+Plugin 'altercation/vim-colors-solarized'
+Plugin 'tomasr/molokai'
+Plugin 'nanotech/jellybeans.vim'
+Plugin 'Lokaltog/vim-distinguished'
+Plugin 'tpope/vim-vividchalk'
+Plugin 'noahfrederick/Hemisu'
+Plugin 'morhetz/gruvbox'
+Plugin 'Zenburn'
+Plugin 'Wombat'
+Plugin 'Guardian'
+Plugin 'wombat256.vim'
+
+call vundle#end()
+" Plugins that are marked for removal:
+"Plugin 'jelera/vim-javascript-syntax'
+"Plugin 'vim-scripts/JavaScript-Indent'
+"Plugin 'Shougo/neocomplcache'
+"Plugin 'Shougo/neosnippet'
+"Plugin 'plasticboy/vim-markdown'
+"Plugin 'jistr/vim-nerdtree-tabs'
+"Plugin 'vim-scripts/VOoM'
+"Plugin 'bufexplorer'
+
+" Vundle requires that this come AFTER plugins are declared:
+syntax enable
+filetype plugin indent on
 
 " Fix backspace when on the terminal...
 set backspace=2
 
-" Set plugin / syntax required options...
-syntax on
-filetype off
-filetype plugin on
+" Turn on line numbering. Turn it off with 'set nonu'
+set nu
 
-" Setup Vundler...
-set rtp+=~/.vim/bundle/vundle/
-call vundle#rc()
+" Indent automatically depending on filetype
+set autoindent
 
-" let Vundle manage Vundle
-" required!
-Bundle 'gmarik/vundle'
+" 'Smart' case insensitive search
+set scs
 
-" Github bundles
-Bundle 'scrooloose/nerdtree'
-Bundle 'scrooloose/nerdcommenter'
-Bundle 'scrooloose/syntastic'
-Bundle 'plasticboy/vim-markdown'
-Bundle 'Lokaltog/vim-easymotion'
-Bundle 'rstacruz/sparkup'
-Bundle 'pangloss/vim-javascript'
-Bundle 'tpope/vim-fugitive'
-Bundle 'wavded/vim-stylus'
-Bundle 'cakebaker/scss-syntax.vim'
-Bundle 'kchmck/vim-coffee-script'
-Bundle 'altercation/vim-colors-solarized'
-Bundle 'tomasr/molokai'
-Bundle 'nanotech/jellybeans.vim'
-Bundle 'Lokaltog/vim-distinguished'
-Bundle 'tpope/vim-vividchalk'
-Bundle 'noahfrederick/Hemisu'
-Bundle 'morhetz/gruvbox'
-Bundle 'bogado/file-line'
-Bundle 'jistr/vim-nerdtree-tabs'
-"Bundle 'Shougo/neocomplcache'
-"Bundle 'Shougo/neosnippet'
-Bundle 'vim-scripts/VOoM'
-Bundle 'slim-template/vim-slim'
-Bundle 'terryma/vim-multiple-cursors'
+" Show command in the last line of the screen
+set sc
 
-" Vim-scripts bundles
-Bundle 'Zenburn'
-Bundle 'Wombat'
-Bundle 'wombat256.vim'
-Bundle 'sudo.vim'
+" Set tabs to four spaces + smart indentation
+set smartindent
+set tabstop=2
+set shiftwidth=2
+set expandtab
+
+" Add row / columnn information
+set ruler
+
+" Highlight search
+set hls
+
+" Wrap text instead of being on one line
+set lbr
+
+" Hide the annoying omnicomplete preview window
+set completeopt-=preview
+
 
 " Plugin-specific settings...
-
-" Filetypes
-autocmd BufNewFile,BufRead *.slim set filetype=slim
+let g:ctrlp_custom_ignore = {
+  \ 'dir':  '\v[\/]\.(git|hg|svn)|node_modules|bower_components$',
+  \ }
 
 " Set personalized key settings...
 let NERDComInsertMap='<c-c>'
@@ -72,66 +123,18 @@ let g:syntastic_mode_map={ 'mode': 'active',
                          \ 'active_filetypes': ['javascript', 'css', 'html'],
                          \ 'passive_filetypes': ['java'] }
 
-"" Neocomplecache
-"let g:neocomplcache_enable_at_startup = 0
-"let g:neocomplcache_enable_smart_case = 1
-"let g:neocomplcache_enable_camel_case_completion = 1
-"let g:neocomplcache_enable_underbar_completion = 1
-"let g:neocomplcache_min_syntax_length = 3
+" Configure vim-indent-guides
+let g:indent_guides_enable_on_vim_startup=1
+let g:indent_guides_auto_colors=0
+autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  ctermbg=238
+autocmd VimEnter,Colorscheme * :hi IndentGuidesEven ctermbg=237
 
-"inoremap <expr><CR>  neocomplcache#smart_close_popup() . "\<CR>"
-"inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
-
-"inoremap <expr><C-h>  neocomplcache#smart_close_popup() . "\<C-h>"
-"inoremap <expr><BS>  neocomplcache#smart_close_popup() . "\<C-h>"
-"inoremap <expr><C-y>  neocomplcache#close_popup()
-"inoremap <expr><C-e>  neocomplcache#cancel_popup()
-
-"autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
-"autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
-"autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
-"autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
-"autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
-
-"" Neosnippet
-"imap <C-k>     <Plug>(neosnippet_expand_or_jump)
-"smap <C-k>     <Plug>(neosnippet_expand_or_jump)
-
-"" Automatically close preview window when popup closes
-"autocmd CursorMovedI * if pumvisible() == 0|pclose|endif
-"autocmd InsertLeave * if pumvisible() == 0|pclose|endif
+" Configure YouCompleteMe
+let g:ycm_add_preview_to_completeopt=0
 
 " This allows the current search to be cleared with <F3>
 nnoremap <F3> :let @/ = ""<CR>
 set whichwrap+=<,>,h,l,[,]
-
-" Indent automatically depending on filetype
-filetype indent on
-set autoindent
-
-" 'Smart' case insensitive search
-set scs
-" Show command in the last line of the screen
-set sc
-
-" Set tabs to four spaces + smart indentation
-set smartindent
-set tabstop=2
-set shiftwidth=2
-set expandtab
-
-" Add row / columnn information
-set ruler
-
-" Higlhight search
-set hls
-
-" Wrap text instead of being on one line
-set lbr
-
-" equalprg
-"au FileType html setlocal equalprg=tidy\ -q\ -i\ -w\ 0\ -m\ -utf8\ --show-body-only\ true\ --show-errors\ 0
-au FileType json setlocal equalprg=python\ -m\ json.tool
 
 " Change colorscheme from default to zenburn
 set background=dark
@@ -152,3 +155,11 @@ autocmd BufWinEnter * match ExtraWhitespace /\s\+$/
 autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
 autocmd InsertLeave * match ExtraWhitespace /\s\+$/
 autocmd BufWinLeave * call clearmatches()
+
+" Disable arrow keys in normal / visual / select modes:
+noremap  <Up> ""
+noremap  <Down> ""
+noremap  <Left> ""
+noremap  <Right> ""
+
+

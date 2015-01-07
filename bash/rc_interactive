@@ -65,3 +65,19 @@ export IRC_CLIENT='irssi'
 # Load Bash It
 source $BASH/bash_it.sh
 source $BASH_IT/completion/available/git.completion.bash
+
+# Configure rbenv
+export RBENV_ROOT=/usr/local/var/rbenv
+if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
+
+# Bash prompt variables for OSX
+if [ -f /Applications/Xcode.app/Contents/Developer/usr/share/git-core/git-completion.bash ]; then
+  source /Applications/Xcode.app/Contents/Developer/usr/share/git-core/git-completion.bash
+fi
+
+if [ -f /Applications/Xcode.app/Contents/Developer/usr/share/git-core/git-prompt.sh ]; then
+  source /Applications/Xcode.app/Contents/Developer/usr/share/git-core/git-prompt.sh
+fi
+
+# Finalize dat path
+export PATH=$PATH:node_modules/.bin
