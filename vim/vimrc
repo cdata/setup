@@ -120,8 +120,8 @@ let g:syntastic_error_symbol='✗'
 let g:syntastic_warning_symbol='⚠'
 
 let g:syntastic_mode_map={ 'mode': 'active',
-                         \ 'active_filetypes': ['javascript', 'css', 'html'],
-                         \ 'passive_filetypes': ['java'] }
+                         \ 'active_filetypes': ['javascript', 'css'],
+                         \ 'passive_filetypes': ['java', 'html'] }
 
 " Configure vim-indent-guides
 let g:indent_guides_enable_on_vim_startup=1

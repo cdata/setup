@@ -44,6 +44,7 @@ function initializePlatform {
     brew install wget
     brew install vim
     brew install nvm
+    brew install Caskroom/cask/spectacle
     brew linkapps
   else
     # Handle an Ubuntu system...
