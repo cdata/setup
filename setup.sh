@@ -61,7 +61,7 @@ function initializeNode {
 
   mkdir -p $HOME/.npm-packages
 
-  nvm install v0.10
+  nvm install stable
 }
 
 function updatePlatform {
