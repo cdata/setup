@@ -43,13 +43,17 @@ function initializePlatform {
     brew install tmux
     brew install wget
     brew install vim
+    brew install nvm
     brew linkapps
+
+    mkdir -p $HOME/.npm-packages
   else
     # Handle an Ubuntu system...
     sudo apt-get -yq update
     sudo apt-get -yq upgrade
     sudo apt-get -yq install aptitude git build-essential openssh-server vim tmux
   fi
+
   set +e
 }
 
@@ -192,10 +196,10 @@ function initializeVim {
 
 function installYouCompleteMe {
   echo "Running $FUNCNAME"
-  
+
   cd $HOME/.vim/bundle/YouCompleteMe
   ./install.sh --clang-completer
-  
+
   cd $HOME
 }
 

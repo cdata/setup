@@ -1,3 +1,7 @@
+# Setup NVM
+source $(brew --prefix nvm)/nvm.sh
+export NVM_DIR=~/.nvm
+
 # Cause Homebrew is awesome..
 export PATH=$PATH:/usr/local/share/npm/bin
 export PATH=$PATH:$HOME/.npm-packages/bin
