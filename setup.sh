@@ -45,8 +45,6 @@ function initializePlatform {
     brew install vim
     brew install nvm
     brew linkapps
-
-    mkdir -p $HOME/.npm-packages
   else
     # Handle an Ubuntu system...
     sudo apt-get -yq update
@@ -55,6 +53,15 @@ function initializePlatform {
   fi
 
   set +e
+}
+
+function initializeNode {
+  source $(brew --prefix nvm)/nvm.sh
+  export NVM_DIR=~/.nvm
+
+  mkdir -p $HOME/.npm-packages
+
+  nvm install v0.10
 }
 
 function updatePlatform {
@@ -163,7 +170,7 @@ function initializeFonts {
 
   if [[ "$platform" == 'Darwin' ]]; then
     # Only set up fonts on OSX for now..
-    cd $fonts_dir
+    pushd $fonts_dir
     #cp "$fonts_repo/DejaVuSansMono/DejaVu Sans Mono for Powerline.otf" ./
     #cp "$fonts_repo/DroidSansMono/Droid Sans Mono for Powerline.otf" ./
     #cp "$fonts_repo/Inconsolata/Inconsolata for Powerline.otf" ./
@@ -185,6 +192,7 @@ function initializeFonts {
     #cp "$fonts_repo/UbuntuMono/Ubuntu Mono Bold Italic for Powerline.otf" ./
     #cp "$fonts_repo/UbuntuMono/Ubuntu Mono for Powerline.otf" ./
     #cp "$fonts_repo/UbuntuMono/Ubuntu Mono Italic for Powerline.otf" ./
+    popd
   fi
 }
 
@@ -192,21 +200,31 @@ function initializeVim {
   echo "Running $FUNCNAME"
   vim +BundleInstall! +BundleClean! +qall!
   installYouCompleteMe
+  installTern
 }
 
 function installYouCompleteMe {
   echo "Running $FUNCNAME"
 
-  cd $HOME/.vim/bundle/YouCompleteMe
+  pushd $HOME/.vim/bundle/YouCompleteMe
   ./install.sh --clang-completer
 
-  cd $HOME
+  popd
+}
+
+function installTern {
+  echo "Running $FUNCNAME"
+
+  pushd $HOME/.vim/bundle/tern_for_vim
+  npm install
+  popd
 }
 
 function updateVim {
   echo "Running $FUNCNAME"
   vim +BundleUpdate +BundleClean! +qall!
   installYouCompleteMe
+  installTern
 }
 
 function selfDestruct {
@@ -224,6 +242,7 @@ else
     initializeRepositories
     initializeDotFiles
     initializeFonts
+    initializeNode
     initializeVim
   fi
   selfDestruct
