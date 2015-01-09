@@ -63,6 +63,7 @@ function initializeNode {
   mkdir -p $HOME/.npm-packages
 
   nvm install stable
+  nvm alias default stable
 }
 
 function updatePlatform {
