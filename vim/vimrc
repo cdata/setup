@@ -24,6 +24,7 @@ Plugin 'scrooloose/nerdcommenter'
 Plugin 'nathanaelkane/vim-indent-guides'
 Plugin 'Raimondi/delimitMate'
 Plugin 'Valloric/YouCompleteMe' " Vim 7.4+. Extra build step: ./install.sh --clang-completer
+Plugin 'ryanss/vim-hackernews'
 
 " JavaScript
 Plugin 'pangloss/vim-javascript'
