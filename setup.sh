@@ -36,9 +36,11 @@ function initializePlatform {
   set -e
   if [[ "$platform" == 'Darwin' ]]; then
     # Handle an OSX system - assumes XCode is installed (LAME!)...
+    set +e
     `which xcode-select` --install
     `which ruby` -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-
+    set -e
+    
     brew install git
     brew install tmux
     brew install wget
