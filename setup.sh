@@ -60,7 +60,7 @@ function initializePlatform {
 
 function initializeNode {
   source $(brew --prefix nvm)/nvm.sh
-  export NVM_DIR=~/.nvm
+  export NVM_DIR="$HOME/.nvm"
 
   mkdir -p $HOME/.npm-packages
 
@@ -158,8 +158,8 @@ function initializeDotFiles {
 
   # Bash-it
   ln -sf $support/bash-it $HOME/.bash_it
-  mkdir -p $support/bash-it/themes/cdata
-  ln -sf $bash/cdata.theme.bash $support/bash-it/themes/cdata/cdata.theme.bash
+  mkdir -p $support/bash-it/custom/themes/cdata
+  ln -sf $bash/cdata.theme.bash $support/bash-it/custom/themes/cdata/cdata.theme.bash
 
   if [[ "$platform" == 'Darwin' ]]; then
     # Automator

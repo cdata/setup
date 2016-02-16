@@ -22,6 +22,9 @@ export REPOS_POLYMER_LABS="$REPOS_GOOGLE/polymerlabs"
 export REPOS_POLYMER="$REPOS_GOOGLE/polymer"
 export REPOS_PERSONAL="$CDATA_REPOS/personal"
 
+export BASH_IT=$HOME/.bash_it
+export BASH_IT_THEME='cdata'
+
 
 # If not running interactively, we are done:
 [ -z "$PS1" ] && return
@@ -69,7 +72,7 @@ HISTFILESIZE=5000
 shopt -s checkwinsize
 
 # Load Bash It
-source $BASH/bash_it.sh
+source $BASH_IT/bash_it.sh
 source $BASH_IT/completion/available/git.completion.bash
 
 # Bash prompt variables for OSX
