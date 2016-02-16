@@ -1,12 +1,44 @@
 #!/bin/bash
 
-# If not running interactively, don't do anything
+export EDITOR=vim
+
+export GOPATH="$HOME/.go"
+export NVM_DIR="$HOME/.nvm"
+
+source $(brew --prefix nvm)/nvm.sh
+
+export PATH=$PATH:$HOME/.npm-packages/bin
+export PATH=$PATH:node_modules/.bin:$HOME/repositories/go/bin
+export PATH=$PATH:/usr/local/sbin
+export PATH=$PATH:$GOPATH/bin
+
+
+export CDATA_REPOS="$HOME/repositories"
+export CDATA_SETUP="$CDATA_REPOS/setup"
+
+export REPOS_GOOGLE="$CDATA_REPOS/google"
+export REPOS_POLYMER_ELEMENTS="$REPOS_GOOGLE/polymerelements"
+export REPOS_POLYMER_LABS="$REPOS_GOOGLE/polymerlabs"
+export REPOS_POLYMER="$REPOS_GOOGLE/polymer"
+export REPOS_PERSONAL="$CDATA_REPOS/personal"
+
+
+# If not running interactively, we are done:
 [ -z "$PS1" ] && return
 
 # Personal aliases
-alias repos="cd $CDATA_REPOSITORIES"
 alias setup="cd $CDATA_SETUP"
 alias update="sh $CDATA_SETUP/setup.sh update"
+
+alias repos="cd $CDATA_REPOS"
+alias pe="cd $REPOS_POLYMER_ELEMENTS"
+alias pl="cd $REPOS_POLYMER_LABS"
+alias p="cd $REPOS_POLYMER"
+alias cdata="cd $REPOS_PERSONAL"
+
+alias ll='ls -alFG'
+alias la='ls -AG'
+alias l='ls -CFG'
 
 # enable color support of ls and also add handy aliases
 if [ -x /usr/bin/dircolors ]; then
@@ -29,46 +61,16 @@ HISTCONTROL=ignoredups:ignorespace
 shopt -s histappend
 
 # for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
-HISTSIZE=1000
-HISTFILESIZE=2000
+HISTSIZE=10000
+HISTFILESIZE=5000
 
 # check the window size after each command and, if necessary,
 # update the values of LINES and COLUMNS.
 shopt -s checkwinsize
 
-# Set some useful aliases
-alias ll='ls -alFG'
-alias la='ls -AG'
-alias l='ls -CFG'
-
-
-# Path to the bash it configuration
-export BASH=$HOME/.bash_it
-
-# Lock and Load a custom theme file
-# location /.bash_it/themes/
-export BASH_THEME='cdata'
-
-# Set my editor and git editor
-export EDITOR="vim"
-export GIT_EDITOR='vim'
-
-# Don't check mail when opening terminal.
-unset MAILCHECK
-
-# Change this to your console based IRC client of choice.
-export IRC_CLIENT='irssi'
-
-# Set this to the command you use for todo.txt-cli
-#export TODO="t"
-
 # Load Bash It
 source $BASH/bash_it.sh
 source $BASH_IT/completion/available/git.completion.bash
-
-# Configure rbenv
-export RBENV_ROOT=/usr/local/var/rbenv
-if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
 
 # Bash prompt variables for OSX
 completion_files=( \
@@ -83,14 +85,3 @@ for completion_file in "${completion_files[@]}"; do
     source $completion_file
   fi
 done
-
-#if [ -f /Applications/Xcode.app/Contents/Developer/usr/share/git-core/git-completion.bash ]; then
-  #source /Applications/Xcode.app/Contents/Developer/usr/share/git-core/git-completion.bash
-#fi
-
-#if [ -f /Applications/Xcode.app/Contents/Developer/usr/share/git-core/git-prompt.sh ]; then
-  #source /Applications/Xcode.app/Contents/Developer/usr/share/git-core/git-prompt.sh
-#fi
-
-# Finalize dat path
-export PATH=$PATH:node_modules/.bin

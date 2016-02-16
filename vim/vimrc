@@ -19,26 +19,29 @@ Plugin 'bogado/file-line'
 Plugin 'sudo.vim'
 Plugin 'kien/ctrlp.vim'
 Plugin 'terryma/vim-multiple-cursors'
-Plugin 'rstacruz/sparkup'
+" Plugin 'rstacruz/sparkup'
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'nathanaelkane/vim-indent-guides'
-Plugin 'Raimondi/delimitMate'
-Plugin 'Valloric/YouCompleteMe' " Vim 7.4+. Extra build step: ./install.sh --clang-completer
+" Plugin 'Raimondi/delimitMate'
+" Plugin 'Valloric/YouCompleteMe' " Vim 7.4+. Extra build step: ./install.sh --clang-completer
 Plugin 'ryanss/vim-hackernews'
+
+" Rust
+Plugin 'rust-lang/rust.vim'
 
 " JavaScript
 Plugin 'pangloss/vim-javascript'
-Plugin 'marijnh/tern_for_vim' " Extra build step. npm install (use system npm)
-Plugin 'kchmck/vim-coffee-script'
+" Plugin 'marijnh/tern_for_vim' " Extra build step. npm install (use system npm)
+" Plugin 'kchmck/vim-coffee-script'
 
 " Templates / Markup
-Plugin 'slim-template/vim-slim'
-Plugin 'mustache/vim-mustache-handlebars'
+" Plugin 'slim-template/vim-slim'
+" Plugin 'mustache/vim-mustache-handlebars'
 
 " CSS
-Plugin 'cakebaker/scss-syntax.vim'
-Plugin 'wavded/vim-stylus'
-Plugin 'groenewege/vim-less'
+" Plugin 'cakebaker/scss-syntax.vim'
+" Plugin 'wavded/vim-stylus'
+" Plugin 'groenewege/vim-less'
 
 " Git
 Plugin 'tpope/vim-fugitive'
