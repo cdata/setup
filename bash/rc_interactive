@@ -2,16 +2,9 @@
 
 export EDITOR=vim
 
-export GOPATH="$HOME/.go"
 export NVM_DIR="$HOME/.nvm"
 
 source $(brew --prefix nvm)/nvm.sh
-
-export PATH=$PATH:$HOME/.npm-packages/bin
-export PATH=$PATH:node_modules/.bin:$HOME/repositories/go/bin
-export PATH=$PATH:/usr/local/sbin
-export PATH=$PATH:$GOPATH/bin
-
 
 export CDATA_REPOS="$HOME/repositories"
 export CDATA_SETUP="$CDATA_REPOS/setup"
@@ -25,6 +18,12 @@ export REPOS_PERSONAL="$CDATA_REPOS/personal"
 export BASH_IT=$HOME/.bash_it
 export BASH_IT_THEME='cdata'
 
+export GOPATH="$CDATA_REPOS/go"
+
+export PATH=$PATH:$HOME/.npm-packages/bin
+export PATH=$PATH:node_modules/.bin:$HOME/repositories/go/bin
+export PATH=$PATH:/usr/local/sbin
+export PATH=$PATH:$GOPATH/bin
 
 # If not running interactively, we are done:
 [ -z "$PS1" ] && return
@@ -37,6 +36,8 @@ alias repos="cd $CDATA_REPOS"
 alias pe="cd $REPOS_POLYMER_ELEMENTS"
 alias pl="cd $REPOS_POLYMER_LABS"
 alias p="cd $REPOS_POLYMER"
+alias g="cd $REPOS_GOOGLE"
+alias togo="cd $GOPATH"
 alias cdata="cd $REPOS_PERSONAL"
 
 alias ll='ls -alFG'
