@@ -59,10 +59,8 @@ function initializePlatform {
 }
 
 function initializeNode {
-  source $(brew --prefix nvm)/nvm.sh
   export NVM_DIR="$HOME/.nvm"
-
-  mkdir -p $HOME/.npm-packages
+  source $NVM_DIR/nvm.sh
 
   nvm install stable
   nvm alias default stable
